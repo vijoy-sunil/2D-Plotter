@@ -5,6 +5,7 @@ void system_init(void)
 {
     Lcd8_Init();                        //lcd initialise
     Lcd8_Clear();
+    goto_default(0,0);                  //on power up goto default location 0,0
 }
 
 void putchar(char ch)

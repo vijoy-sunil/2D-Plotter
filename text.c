@@ -1,6 +1,12 @@
 #include "system.h"
 
 //character mapping here
+void goto_default(float origin_x,float origin_y)
+{
+    origin_x=0;
+    origin_y=0;
+}
+
 void next_line(void)
 {
 

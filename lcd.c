@@ -279,52 +279,6 @@ void lcd_number(int number,char digits)  //to display as a number on lcd
         Lcd8_Write_Char(number+48);
 }
 
-void lcd_screen_1(void)         //QWERTY PEN
-{
-    unsigned char main_logo0[8] = {0x00,0x01,0x03,0x06,0x0C,0x18,0x10,0x10};
-    unsigned char main_logo1[8] = {0x00,0x10,0x18,0x0C,0x06,0x03,0x01,0x01};
-    unsigned char main_logo2[8] = {0x01,0x01,0x1B,0x1E,0x0C,0x1E,0x17,0x03};
-    unsigned char main_logo3[8] = {0x10,0x10,0x18,0x0C,0x06,0x03,0x01,0x00};
-
-    lcdcreatechar(0,main_logo0);
-    lcdcreatechar(1,main_logo1);
-    lcdcreatechar(2,main_logo2);
-    lcdcreatechar(3,main_logo3);
-
-    Lcd_gotoxy(1,3);
-
-    RS=1;
-    RW=0;
-    *LCD_PTR = 0;           //write to ddram
-
-    Lcd_Delay(5);
-
-    Lcd_gotoxy(1,4);
-
-    RS=1;
-    RW=0;
-    *LCD_PTR = 1;           //write to ddram
-    Lcd_Delay(5);
-
-    Lcd_gotoxy(2,4);
-
-    RS=1;
-    RW=0;
-    *LCD_PTR = 2;           //write to ddram
-    Lcd_Delay(5);
-
-    Lcd_gotoxy(2,3);
-
-    RS=1;
-    RW=0;
-    *LCD_PTR = 3;           //write to ddram
-    Lcd_Delay(5);
-
-    Lcd_gotoxy(1,5);
-    Lcd8_Write_String("WERTY PEN");
-    Lcd_Delay(5);
-}
-
 void lcd_screen_2(void)         //MENU items
 {
     Lcd8_Clear();
@@ -398,17 +352,6 @@ void lcd_screen_2_3_2_1(void)
     Lcd8_Write_String("Printing...");
 }
 
-void cursor_display(char x)           //display cursor- custom char - stored at character code 0
-{
-    unsigned char cursor_logo[8] = {0x18,0x14,0x0A,0x05,0x05,0x0A,0x14,0x18};
-    lcdcreatechar(7,cursor_logo);
-
-    Lcd_gotoxy(x,0);
-    Lcd_Delay(5);
-    RS=1;
-    RW=0;
-    *LCD_PTR = 7;           //write to ddram
-}
 
 void menu_scroll(void)
 {
@@ -417,6 +360,8 @@ void menu_scroll(void)
         Lcd_gotoxy(1 + cursor_x,0);                //clear cursor on next line
         Lcd8_Write_Char(' ');
         cursor_x++;
+        if(cursor_x > 2)
+            cursor_x =2;
         cursor_display(1 + cursor_x);    //display cursor
         menu_action=0;
     }
@@ -425,7 +370,10 @@ void menu_scroll(void)
         Lcd_gotoxy(1 + cursor_x,0);                //clear cursor on prev line
         Lcd8_Write_Char(' ');
         cursor_x--;
+        if(cursor_x >2)
+            cursor_x = 0;
         cursor_display(1 + cursor_x);   //display cursor
         menu_action=0;
     }
 }
+

@@ -14,6 +14,7 @@
 #include "i2c.h"
 #include "expander.h"
 #include "text.h"
+#include "custom_logo.h"
 
 #define INT0_EDGE 0x01
 #define INT0_MASK 0x01

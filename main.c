@@ -8,6 +8,7 @@
 
 unsigned char cursor_x=0;
 unsigned char sw_press,menu_action;
+float origin_x=0,origin_y=0;            //pen location
 
 _sdcc_external_startup()
 {
@@ -49,6 +50,12 @@ void main(void)
                 {
                     lcd_screen_2_1();
                     cursor_x = 0;
+                    origin_menu_x(2,1,2,3);            //custom logo for x dir
+                    origin_menu_y(1,2,3,2);            //custom logo for y dir
+                    Lcd_gotoxy(2,8);
+                    Lcd8_Write_String("X:");
+                    Lcd_gotoxy(3,8);
+                    Lcd8_Write_String("Y:");
                     while(1)
                     {
                         set_origin();
@@ -67,29 +74,29 @@ void main(void)
                     while(1)
                     {
                         menu_scroll();
-                        if(menu_action == ENTER)       //enter option
+                        if(menu_action == ENTER)            //enter option
                         {
                             menu_action = 0;
                             if(cursor_x == 0)               //1x1 SQUARE
                             {
-                                cursor_x = 0;
-                                //hour glass logo next to 1x1 square
+                                hour_glass(1,15);           //hour glass logo next to 1x1 square
                                 quick_square();
-                                //clear hour glass logo
+                                Lcd_gotoxy(1,15);               //clear hour glass logo
+                                Lcd8_Write_Char(' ');
                             }
                             else if(cursor_x == 1)           //1x1 TRIANGLES
                             {
-                                cursor_x = 0;
-                                //hour glass logo next to 1x1 triangle
+                                hour_glass(2,15);           //hour glass logo next to 1x1 triangle
                                 quick_triangle();
-                                //clear hour glass logo
+                                Lcd_gotoxy(2,15);               //clear hour glass logo
+                                Lcd8_Write_Char(' ');
                             }
                             else if(cursor_x == 2)           //1x1 CIRCLE
                             {
-                                cursor_x = 0;
-                                //hour glass logo next to 1x1 circle
+                                hour_glass(3,15);           //hour glass logo next to 1x1 circle
                                 quick_circle();
-                                //clear hour glass logo
+                                Lcd_gotoxy(3,15);               //clear hour glass logo
+                                Lcd8_Write_Char(' ');
                             }
                         }
                         else if(menu_action == BACK)
@@ -128,12 +135,11 @@ void main(void)
                                         if(cursor_x == 0)               //FONT SIZE
                                         {
                                             cursor_x=0;
-                                            //display custom up/down button
                                             while(1)
                                             {
                                                 //up/down switch press
                                                 //increment font - font_size
-                                                //display font_size
+                                                //display font_size -initial value
                                                 //condition for break
 
                                             }
@@ -141,10 +147,10 @@ void main(void)
                                         else if(cursor_x == 1)          //FONT STYLE
                                         {
                                             cursor_x=0;
-                                            //display custom up/down button
                                             while(1)
                                             {
                                                 //up/down switch press
+                                                //default: light
                                                 //bold-no bold display
                                                 //condition for break
                                             }
@@ -169,20 +175,23 @@ void main(void)
                                 while(1)
                                 {
                                     menu_scroll();
-                                    if(menu_action == ENTER)       //enter option
+                                    if(menu_action == ENTER)            //enter option
                                     {
                                         menu_action = 0;
                                         if(cursor_x == 0)               //start option
                                         {
+                                            Lcd_gotoxy(2,11);            //clear stop logo
+                                            Lcd8_Write_Char(' ');
                                             cursor_x=0;
-                                            //hour glas  logo display next to print
+                                            hour_glass(1,11);               //hour glas  logo display next to print
                                             //main print function - loop - in isr - down switch  - move cursor - break
-                                            //goto orogon
+                                            //goto origin
                                         }
                                         else if(cursor_x == 1)           //stop option
                                         {
-                                            cursor_x=0;
-                                            //exclamatio logo next to stop
+                                            Lcd_gotoxy(1,11);            //clear hour glass logo
+                                            Lcd8_Write_Char(' ');
+                                            stop_logo(2,11);                 //exclamatio logo next to stop
                                             //stop print
                                             //back to origin
                                         }
@@ -224,7 +233,6 @@ void ex0_isr(void) __interrupt 0        //isr for external interrupt
 
     if(sw_press != 0xFF)
     {
-        printf_tiny("%x",sw_press);
         if(sw_press == LEFT)                //identify switch and set flag
         {
             menu_action = BACK;

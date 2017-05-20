@@ -38,8 +38,6 @@ void show_lcd(int eeprom_Address,unsigned char row,unsigned char eeprom_Data);
 void lcdcreatechar(unsigned char ccode,unsigned char rows[]);
 void lcd_number(int number,char digits);
 
-void cursor_display(char x);
-void lcd_screen_1(void);
 void lcd_screen_2(void);
 void lcd_screen_2_1(void);
 void lcd_screen_2_2(void);
