@@ -2,7 +2,13 @@
 #define TEXT_H_INCLUDED
 
 //define shapes here
-void goto_default(float origin_x,float origin_y);
+
+//page start end cordinates
+#define X_STARTPAGE 0
+#define Y_STARTPAGE 0
+#define X_ENDPAGE   0
+#define Y_ENDPAGE   0
+
 void next_line(void);
 void next_word (void);
 void next_letter (void);

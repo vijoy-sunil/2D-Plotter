@@ -5,10 +5,10 @@
 #define ST2 P1_1
 #define DR2 P1_4
 
-void motor_1_xy(int x,int y);
-void motor_2_xy(int x,int y);
-void set_origin (void);
-void goto_origin (int origin_x,int origin_y);
-void sw_motor_xy (void);
+void motor_1(float x);
+void motor_2(float y);
+
+void goto_origin (float origin_x,float origin_y);
+void motor_goto_xy(float x,float y);
 
 #endif // STEPPER_XY_H_INCLUDED

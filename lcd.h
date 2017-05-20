@@ -28,15 +28,14 @@ void Lcd8_Write_Char(char a);
 void Lcd8_Write_String(char *a);
 
 
-void dump_dd(void);
-void dump_cg(void);
+
 
 uint8_t *mod_itoa(uint8_t * str, uint32_t data);
 uint8_t read_ddram_address(void);
 void line_mod(void);
-void show_lcd(int eeprom_Address,unsigned char row,unsigned char eeprom_Data);
 void lcdcreatechar(unsigned char ccode,unsigned char rows[]);
-void lcd_number(int number,char digits);
+
+
 
 void lcd_screen_2(void);
 void lcd_screen_2_1(void);

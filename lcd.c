@@ -173,72 +173,8 @@ uint8_t *mod_itoa(uint8_t * str, uint32_t dat)
 
    return str;
 }
-void show_lcd(int eeprom_Address,unsigned char row,unsigned char eeprom_Data)
-{
-    uint8_t temp[10];
-    mod_itoa(temp,eeprom_Address);
-    Lcd_gotoxy(row,0);
 
-    Lcd8_Write_String(temp);
-    Lcd8_Write_Char(':');
 
-    mod_itoa(temp,eeprom_Data);
-    Lcd8_Write_String(temp);
-}
-
-void dump_dd(void)      //ddram dump memory
-{
-    int i;
-    uint8_t dd_add;
-
-    Lcd8_Cmd(0x80);
-    dd_add = read_ddram_address();
-
-    printf("%x :\t",dd_add);
-
-    for(i=1;i<81;i++)
-    {
-        RS = 1;
-        RW = 1;
-        printf("%x\t",*LCD_PTR);
-        if((i % 16 ==0) && (i !=80))
-        {
-            printf("\r\n");
-            dd_add = read_ddram_address();
-            printf("%x :\t",dd_add);
-        }
-    }
-
-    RS=0;
-    RW=0;
-}
-
-void dump_cg(void)      //cgram dump memory
-{
-    int i;
-    uint8_t dd_add;
-
-    Lcd8_Cmd(0x40);
-    dd_add = read_ddram_address();
-
-    printf("%x :\t",dd_add);
-
-    for(i=1;i<65;i++)
-    {
-        RS = 1;
-        RW = 1;
-        printf("%x\t",*LCD_PTR);
-        if((i % 16 ==0) && (i !=64))
-        {
-            printf("\r\n");
-            dd_add = read_ddram_address();
-            printf("%x :\t",dd_add);
-        }
-    }
-
-    RS=0;
-    RW=0;
-}
 
 void lcdcreatechar(unsigned char ccode,unsigned char rows[])
 {
@@ -265,19 +201,6 @@ void lcdcreatechar(unsigned char ccode,unsigned char rows[])
     }
 }
 
-
-void lcd_number(int number,char digits)  //to display as a number on lcd
-{
-    int data_val;
-    if(digits==0){
-        data_val=number/10;
-        Lcd8_Write_Char(data_val+48);
-        data_val=number%10;
-        Lcd8_Write_Char(data_val+48);
-        }
-    else
-        Lcd8_Write_Char(number+48);
-}
 
 void lcd_screen_2(void)         //MENU items
 {
@@ -376,4 +299,5 @@ void menu_scroll(void)
         menu_action=0;
     }
 }
+
 

@@ -1,6 +1,6 @@
 /*
-* QWERTY_PEN REV 0.1
-* LCD MENU
+* QWERTY_PEN REV
+*
  */
 
 
@@ -8,7 +8,7 @@
 
 unsigned char cursor_x=0;
 unsigned char sw_press,menu_action;
-float origin_x=0,origin_y=0;            //pen location
+
 
 _sdcc_external_startup()
 {
@@ -43,183 +43,15 @@ void main(void)
         while(1)
         {
             menu_scroll();
-            if(menu_action == ENTER)       //enter option
+            if(menu_action == ENTER)            //enter option
             {
                 menu_action = 0;
-                if(cursor_x == 0)               //origin set - no cursor location
-                {
-                    lcd_screen_2_1();
-                    cursor_x = 0;
-                    origin_menu_x(2,1,2,3);            //custom logo for x dir
-                    origin_menu_y(1,2,3,2);            //custom logo for y dir
-                    Lcd_gotoxy(2,8);
-                    Lcd8_Write_String("X:");
-                    Lcd_gotoxy(3,8);
-                    Lcd8_Write_String("Y:");
-                    while(1)
-                    {
-                        set_origin();
-                        //condition for exit loop
-                        //print on lcd : x,y
-                        //lcd_screen_2();     //menu - origin/quick/custom
-                        //cursor_display(1);   //cursor display - initial location
-                        //break;
-                    }
-                }
+                if(cursor_x == 0)               //origin set
+                    origin_menu_1_1();
                 else if(cursor_x == 1)          //quick print
-                {
-                    lcd_screen_2_2();            //cursor display - initial location
-                    cursor_display(1);
-                    cursor_x = 0;
-                    while(1)
-                    {
-                        menu_scroll();
-                        if(menu_action == ENTER)            //enter option
-                        {
-                            menu_action = 0;
-                            if(cursor_x == 0)               //1x1 SQUARE
-                            {
-                                hour_glass(1,15);           //hour glass logo next to 1x1 square
-                                quick_square();
-                                Lcd_gotoxy(1,15);               //clear hour glass logo
-                                Lcd8_Write_Char(' ');
-                            }
-                            else if(cursor_x == 1)           //1x1 TRIANGLES
-                            {
-                                hour_glass(2,15);           //hour glass logo next to 1x1 triangle
-                                quick_triangle();
-                                Lcd_gotoxy(2,15);               //clear hour glass logo
-                                Lcd8_Write_Char(' ');
-                            }
-                            else if(cursor_x == 2)           //1x1 CIRCLE
-                            {
-                                hour_glass(3,15);           //hour glass logo next to 1x1 circle
-                                quick_circle();
-                                Lcd_gotoxy(3,15);               //clear hour glass logo
-                                Lcd8_Write_Char(' ');
-                            }
-                        }
-                        else if(menu_action == BACK)
-                        {
-                            cursor_x = 0;
-                            lcd_screen_2();             //menu - origin/quick/custom
-                            cursor_display(1);          //cursor display - initial location
-                            menu_action=0;
-                            delay_ms(1);
-                            break;
-                        }
-                    }
-                }
+                    quick_menu_1_2();
                 else if(cursor_x == 2)          //custom print
-                {
-                    lcd_screen_2_3();           //cursor display - initial location
-                    cursor_display(1);
-                    cursor_x = 0;
-                    while(1)
-                    {
-                        menu_scroll();
-                        if(menu_action == ENTER)       //enter option
-                        {
-                            menu_action = 0;
-                            if(cursor_x == 0)               //STYLE select
-                            {
-                                lcd_screen_2_3_1();         //cursor display - initial location
-                                cursor_display(1);
-                                cursor_x = 0;
-                                while(1)
-                                {
-                                    menu_scroll();
-                                    if(menu_action == ENTER)       //enter option
-                                    {
-                                        menu_action = 0;
-                                        if(cursor_x == 0)               //FONT SIZE
-                                        {
-                                            cursor_x=0;
-                                            while(1)
-                                            {
-                                                //up/down switch press
-                                                //increment font - font_size
-                                                //display font_size -initial value
-                                                //condition for break
-
-                                            }
-                                        }
-                                        else if(cursor_x == 1)          //FONT STYLE
-                                        {
-                                            cursor_x=0;
-                                            while(1)
-                                            {
-                                                //up/down switch press
-                                                //default: light
-                                                //bold-no bold display
-                                                //condition for break
-                                            }
-                                        }
-                                    }
-                                    else if(menu_action == BACK)
-                                    {
-                                        cursor_x = 0;
-                                        lcd_screen_2_3();            //custom print
-                                        cursor_display(1);          //cursor display - initial location
-                                        menu_action=0;
-                                        delay_ms(1);
-                                        break;
-                                    }
-                                }
-                            }
-                            else if(cursor_x == 1)           //PRINT select
-                            {
-                                lcd_screen_2_3_2();
-                                cursor_display(1);          //cursor display initial location
-                                cursor_x = 0;
-                                while(1)
-                                {
-                                    menu_scroll();
-                                    if(menu_action == ENTER)            //enter option
-                                    {
-                                        menu_action = 0;
-                                        if(cursor_x == 0)               //start option
-                                        {
-                                            Lcd_gotoxy(2,11);            //clear stop logo
-                                            Lcd8_Write_Char(' ');
-                                            cursor_x=0;
-                                            hour_glass(1,11);               //hour glas  logo display next to print
-                                            //main print function - loop - in isr - down switch  - move cursor - break
-                                            //goto origin
-                                        }
-                                        else if(cursor_x == 1)           //stop option
-                                        {
-                                            Lcd_gotoxy(1,11);            //clear hour glass logo
-                                            Lcd8_Write_Char(' ');
-                                            stop_logo(2,11);                 //exclamatio logo next to stop
-                                            //stop print
-                                            //back to origin
-                                        }
-                                    }
-                                    else if(menu_action == BACK)
-                                    {
-                                        cursor_x = 0;
-                                        lcd_screen_2_3();            //custom print
-                                        cursor_display(1);          //cursor display - initial location
-                                        menu_action=0;
-                                        delay_ms(1);
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-
-
-                        else if(menu_action == BACK)
-                        {
-                            lcd_screen_2();             //menu - origin/quick/custom
-                            cursor_display(1);          //cursor display initial location
-                            menu_action=0;
-                            cursor_x = 0;
-                            break;
-                        }
-                    }
-                }
+                    custom_menu_1_3();
             }
         }
     }
@@ -233,7 +65,11 @@ void ex0_isr(void) __interrupt 0        //isr for external interrupt
 
     if(sw_press != 0xFF)
     {
-        if(sw_press == LEFT)                //identify switch and set flag
+        if(sw_press == (LEFT & RIGHT))
+        {
+            menu_action = ORIGIN_SET;
+        }
+        else if(sw_press == LEFT)                //identify switch and set flag
         {
             menu_action = BACK;
         }

@@ -1,29 +1,32 @@
 #include "system.h"
+float current_x,current_y;
 
-void motor_1_xy(int x,int y)    //X AXIS MOTOR CONTROL
+void motor_1(float x)    //XY AXIS MOTOR CONTROL
+{
+    if(current_x > x)       //move right
+    {
+
+    }
+    else                    //move left
+    {
+
+    }
+}
+
+void motor_2(float y)    //XY AXIS MOTOR CONTROL
+{
+    if(current_y > y)       //move down
+    {
+
+    }
+    else                    //move up
+    {
+
+    }
+}
+
+void motor_goto_xy(float x,float y)
 {
     x=0;
     y=0;
-}
-
-void motor_2_xy(int x,int y)    //Y AXIS MOTOR CONTROL
-{
-    x=0;
-    y=0;
-}
-
-void set_origin(void)
-{
-
-}
-
-void goto_origin(int origin_x,int origin_y)
-{
-    origin_x=0;
-    origin_y=0;
-}
-
-void sw_motor_xy(void)
-{
-
 }
