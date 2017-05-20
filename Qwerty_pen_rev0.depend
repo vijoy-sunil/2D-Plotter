@@ -1,0 +1,80 @@
+# depslib dependency file v1.0
+1479591098 source:c:\users\vijoy-pc\desktop\esd\qerty_revs\qwerty_pen_rev0\delays.c
+	"system.h"
+
+1479597031 c:\users\vijoy-pc\desktop\esd\qerty_revs\qwerty_pen_rev0\system.h
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	"stdio.h"
+	"stdlib.h"
+	"stdint.h"
+	"stepper_xy.h"
+	"delays.h"
+	"lcd.h"
+	"i2c.h"
+	"expander.h"
+
+1479586177 c:\users\vijoy-pc\desktop\esd\qerty_revs\qwerty_pen_rev0\stepper_xy.h
+
+1479586032 c:\users\vijoy-pc\desktop\esd\qerty_revs\qwerty_pen_rev0\delays.h
+
+1479596278 c:\users\vijoy-pc\desktop\esd\qerty_revs\qwerty_pen_rev0\lcd.h
+	"stdint.h"
+
+1479597072 c:\users\vijoy-pc\desktop\esd\qerty_revs\qwerty_pen_rev0\i2c.h
+
+1479597090 c:\users\vijoy-pc\desktop\esd\qerty_revs\qwerty_pen_rev0\expander.h
+
+1479596188 source:c:\users\vijoy-pc\desktop\esd\qerty_revs\qwerty_pen_rev0\lcd.c
+	"system.h"
+
+1479675400 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\delays.c
+	"system.h"
+
+1479675400 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\system.h
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	"stdio.h"
+	"stdlib.h"
+	"stdint.h"
+	"stepper_xy.h"
+	"delays.h"
+	"lcd.h"
+	"i2c.h"
+	"expander.h"
+	"text.h"
+
+1479681581 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\stepper_xy.h
+
+1479675400 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\delays.h
+
+1479687146 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\lcd.h
+	"stdint.h"
+
+1479675400 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\i2c.h
+
+1479683688 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\expander.h
+
+1479682534 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\text.h
+
+1479675400 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\expander.c
+	"system.h"
+
+1479675400 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\i2c.c
+	"system.h"
+
+1479687132 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\lcd.c
+	"system.h"
+
+1479686375 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\main.c
+	"system.h"
+
+1479686103 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\system.c
+	"system.h"
+
+1479683818 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\stepper_xy.c
+	"system.h"
+
+1479682992 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\text.c
+	"system.h"
+

@@ -1,6 +1,7 @@
 
 #include "system.h"
-
+extern unsigned char cursor_x;
+extern unsigned char menu_action;
 void Lcd_Delay(int a)
 {
     int j;
@@ -40,10 +41,10 @@ void line_mod(void)
 
 void Lcd_Busywait(void)
 {
-    RW = 1;
-    while(*LCD_PTR & BUSY_MASK);
-    RW = 0;
-    printf("\r\nout of busy wait");
+//    RW = 1;
+//    while(*LCD_PTR & BUSY_MASK);
+//    RW = 0;
+    Lcd_Delay(5);
 }
 
 void Lcd8_Port(char a)
@@ -280,7 +281,48 @@ void lcd_number(int number,char digits)  //to display as a number on lcd
 
 void lcd_screen_1(void)         //QWERTY PEN
 {
+    unsigned char main_logo0[8] = {0x00,0x01,0x03,0x06,0x0C,0x18,0x10,0x10};
+    unsigned char main_logo1[8] = {0x00,0x10,0x18,0x0C,0x06,0x03,0x01,0x01};
+    unsigned char main_logo2[8] = {0x01,0x01,0x1B,0x1E,0x0C,0x1E,0x17,0x03};
+    unsigned char main_logo3[8] = {0x10,0x10,0x18,0x0C,0x06,0x03,0x01,0x00};
 
+    lcdcreatechar(0,main_logo0);
+    lcdcreatechar(1,main_logo1);
+    lcdcreatechar(2,main_logo2);
+    lcdcreatechar(3,main_logo3);
+
+    Lcd_gotoxy(1,3);
+
+    RS=1;
+    RW=0;
+    *LCD_PTR = 0;           //write to ddram
+
+    Lcd_Delay(5);
+
+    Lcd_gotoxy(1,4);
+
+    RS=1;
+    RW=0;
+    *LCD_PTR = 1;           //write to ddram
+    Lcd_Delay(5);
+
+    Lcd_gotoxy(2,4);
+
+    RS=1;
+    RW=0;
+    *LCD_PTR = 2;           //write to ddram
+    Lcd_Delay(5);
+
+    Lcd_gotoxy(2,3);
+
+    RS=1;
+    RW=0;
+    *LCD_PTR = 3;           //write to ddram
+    Lcd_Delay(5);
+
+    Lcd_gotoxy(1,5);
+    Lcd8_Write_String("WERTY PEN");
+    Lcd_Delay(5);
 }
 
 void lcd_screen_2(void)         //MENU items
@@ -296,22 +338,27 @@ void lcd_screen_2(void)         //MENU items
     Lcd8_Write_String("Custom Print");  //origin -  ply/pause/stop
 }
 
-void lcd_screen_2_1(void)
+void lcd_screen_2_1(void)               //origin set menu
 {
+    Lcd8_Clear();
+    Lcd_gotoxy(0,5);
+    Lcd8_Write_String("ORIGIN");
 
 }
-void lcd_screen_2_2(void)
+void lcd_screen_2_2(void)               //quick print
 {
     Lcd8_Clear();
     Lcd_gotoxy(0,5);
     Lcd8_Write_String("QUICK");
     Lcd_gotoxy(1,1);
-    Lcd8_Write_String("Quick Print");   //origin - quick shapes
+    Lcd8_Write_String("1x1 SQUARE");
     Lcd_gotoxy(2,1);
-    Lcd8_Write_String("Custom Print");
+    Lcd8_Write_String("1x1 TRIANGLE");
+    Lcd_gotoxy(3,1);
+    Lcd8_Write_String("1x1 CIRCLE");
 }
 
-void lcd_screen_2_3(void)         //custom print on switch press
+void lcd_screen_2_3(void)               //custom print on switch press
 {
    Lcd8_Clear();
    Lcd_gotoxy(0,2);
@@ -341,7 +388,44 @@ void lcd_screen_2_3_2(void)
     Lcd_gotoxy(1,1);
     Lcd8_Write_String("START");
     Lcd_gotoxy(2,1);
-    Lcd8_Write_String("PAUSE");
-    Lcd_gotoxy(3,1);
     Lcd8_Write_String("STOP");
+}
+
+void lcd_screen_2_3_2_1(void)
+{
+    Lcd8_Clear();
+    Lcd_gotoxy(3,5);
+    Lcd8_Write_String("Printing...");
+}
+
+void cursor_display(char x)           //display cursor- custom char - stored at character code 0
+{
+    unsigned char cursor_logo[8] = {0x18,0x14,0x0A,0x05,0x05,0x0A,0x14,0x18};
+    lcdcreatechar(7,cursor_logo);
+
+    Lcd_gotoxy(x,0);
+    Lcd_Delay(5);
+    RS=1;
+    RW=0;
+    *LCD_PTR = 7;           //write to ddram
+}
+
+void menu_scroll(void)
+{
+    if(menu_action == SCROLL_DOWN)
+    {
+        Lcd_gotoxy(1 + cursor_x,0);                //clear cursor on next line
+        Lcd8_Write_Char(' ');
+        cursor_x++;
+        cursor_display(1 + cursor_x);    //display cursor
+        menu_action=0;
+    }
+    else if(menu_action == SCROLL_UP)
+    {
+        Lcd_gotoxy(1 + cursor_x,0);                //clear cursor on prev line
+        Lcd8_Write_Char(' ');
+        cursor_x--;
+        cursor_display(1 + cursor_x);   //display cursor
+        menu_action=0;
+    }
 }

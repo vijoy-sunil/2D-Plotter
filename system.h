@@ -11,6 +11,13 @@
 #include "stepper_xy.h"
 #include "delays.h"
 #include "lcd.h"
+#include "i2c.h"
+#include "expander.h"
+#include "text.h"
+
+#define INT0_EDGE 0x01
+#define INT0_MASK 0x01
+#define GLOBAL_INT 0x80
 
 void system_init(void);
 
