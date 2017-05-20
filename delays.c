@@ -1,6 +1,4 @@
-#include <mcs51/8051.h>
-#include <at89c51ed2.h>
-#include "delays.h"
+#include "system.h"
 
 void delay_us(unsigned int us_count)
 {

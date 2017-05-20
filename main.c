@@ -1,17 +1,13 @@
 /*
-//Stepper motor control
+* QWERTY_PEN REV 0.1
+* LCD MENU
  */
 
-#include <mcs51/8051.h>
-#include <at89c51ed2.h>
 
-#include "stepper_xy.h"
-#include "delays.h"
-
+#include "system.h"
 _sdcc_external_startup()
 {
-//    AUXR|=0x0C; //enable 1kb xram
-//
+    AUXR |= 0x0C;
 //setting baud to 9600
     TMOD=0X20;
     TH1=-3;
@@ -24,32 +20,34 @@ _sdcc_external_startup()
 
 void main(void)
 {
-    int i=0;
-    EN2 = 0;
+    system_init();
 while(1)
 {
-    DR2 = 0;
-
-    while(i<300)
-    {
-        ST2 =1;
-        delay_ms(10);
-        ST2 =0;
-        delay_ms(10);
-        i++;
-    }
-
-    DR2 = 1;
-    i=0;
-    while(i<300)
-    {
-        ST2 =1;
-        delay_ms(10);
-        ST2 =0;
-        delay_ms(10);
-        i++;
-    }
-    i=0;
+    lcd_screen_2();
+    delay_sec(5);
+    lcd_screen_2_1();
+    delay_sec(5);
+    lcd_screen_2_2();
+    delay_sec(5);
+    lcd_screen_2_3();
+    delay_sec(5);
+    lcd_screen_2_3_1();
+    delay_sec(5);
+    lcd_screen_2_3_2();
+    delay_sec(5);
+}
 }
 
+void putchar(char ch)
+{
+    SBUF = ch;  	                // load serial port with transmit value
+    while(!TI);				        // compare asm code generated for these three lines
+    TI=0;  	                        // clear TI flag
+}
+
+char getchar (void)
+{
+    while ((SCON & 0x01) == 0);     // wait for character to be received, spin on RI
+	RI = 0;			                // clear RI flag
+	return SBUF;  	                // return character from SBUF
 }
