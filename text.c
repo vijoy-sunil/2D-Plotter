@@ -23,10 +23,11 @@ void draw_char (char letter)
  letter=0;
 }
 
-void draw_string (char *str)
+void draw_string (void)
 {
 //calls next_line,next_word,next_letter automatically
-    str[0]=0;
+//calls draw char here
+//read from buffer here
 }
 
 void pen_up(void)       //servo motor control

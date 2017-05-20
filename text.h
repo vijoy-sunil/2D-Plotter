@@ -13,7 +13,7 @@ void next_line(void);
 void next_word (void);
 void next_letter (void);
 void draw_char (char letter);
-void draw_string (char *str);
+void draw_string (void);
 void pen_up(void);
 void pen_down(void);
 

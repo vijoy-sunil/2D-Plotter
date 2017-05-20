@@ -20,6 +20,8 @@
 #define INT0_EDGE 0x01
 #define INT0_MASK 0x01
 #define GLOBAL_INT 0x80
+#define SERIAL_MASK 0x90
+#define BUFFER_SIZE 500
 
 void system_init(void);
 
