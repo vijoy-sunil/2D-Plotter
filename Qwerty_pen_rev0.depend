@@ -1,0 +1,104 @@
+# depslib dependency file v1.0
+1479591098 source:c:\users\vijoy-pc\desktop\esd\qerty_revs\qwerty_pen_rev0\delays.c
+	"system.h"
+
+1479597031 c:\users\vijoy-pc\desktop\esd\qerty_revs\qwerty_pen_rev0\system.h
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	"stdio.h"
+	"stdlib.h"
+	"stdint.h"
+	"stepper_xy.h"
+	"delays.h"
+	"lcd.h"
+	"i2c.h"
+	"expander.h"
+
+1479586177 c:\users\vijoy-pc\desktop\esd\qerty_revs\qwerty_pen_rev0\stepper_xy.h
+
+1479586032 c:\users\vijoy-pc\desktop\esd\qerty_revs\qwerty_pen_rev0\delays.h
+
+1479596278 c:\users\vijoy-pc\desktop\esd\qerty_revs\qwerty_pen_rev0\lcd.h
+	"stdint.h"
+
+1479597072 c:\users\vijoy-pc\desktop\esd\qerty_revs\qwerty_pen_rev0\i2c.h
+
+1479597090 c:\users\vijoy-pc\desktop\esd\qerty_revs\qwerty_pen_rev0\expander.h
+
+1479596188 source:c:\users\vijoy-pc\desktop\esd\qerty_revs\qwerty_pen_rev0\lcd.c
+	"system.h"
+
+1479870926 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\delays.c
+	"system.h"
+
+1480823488 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\system.h
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	"stdio.h"
+	"stdlib.h"
+	"stdint.h"
+	"stepper_xy.h"
+	"servo.h"
+	"delays.h"
+	"lcd.h"
+	"i2c.h"
+	"expander.h"
+	"text.h"
+	"custom_logo.h"
+	"menu.h"
+	"shapes.h"
+
+1480891366 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\stepper_xy.h
+
+1479675400 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\delays.h
+
+1480423109 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\lcd.h
+	"stdint.h"
+
+1479675400 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\i2c.h
+
+1479851826 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\expander.h
+
+1480889639 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\text.h
+
+1480105084 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\expander.c
+	"system.h"
+
+1479675400 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\i2c.c
+	"system.h"
+
+1480634788 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\lcd.c
+	"system.h"
+
+1480896947 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\main.c
+	"system.h"
+
+1480903747 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\system.c
+	"system.h"
+
+1480829491 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\stepper_xy.c
+	"system.h"
+
+1480903584 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\text.c
+	"system.h"
+
+1479697780 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\custom_logo.h
+
+1480457155 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\custom_logo.c
+	"system.h"
+
+1479781292 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\menu.h
+
+1480889598 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\menu.c
+	"system.h"
+
+1480572532 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\servo.h
+
+1480898451 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\servo.c
+	"system.h"
+
+1480561717 c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\shapes.h
+
+1480564933 source:c:\users\visu3975\downloads\qwerty_pen_rev0-20161120t205616z\qwerty_pen_rev0\shapes.c
+	"system.h"
+
