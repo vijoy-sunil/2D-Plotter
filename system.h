@@ -9,6 +9,7 @@
 #include "stdint.h"
 
 #include "stepper_xy.h"
+#include "servo.h"
 #include "delays.h"
 #include "lcd.h"
 #include "i2c.h"

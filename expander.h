@@ -16,7 +16,7 @@
 #define ENTER 0x0E
 #define SCROLL_UP 0x0A
 #define SCROLL_DOWN 0x0F
-#define ORIGIN_SET 0x0D
+#define VALUE_SET 0x0D
 
 #define SW_MASK 0x0F
 

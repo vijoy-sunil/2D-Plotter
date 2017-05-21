@@ -6,7 +6,7 @@
 
 #include "system.h"
 
-unsigned char cursor_x=0;
+unsigned char cursor_x;
 unsigned char sw_press,menu_action;
 
 xdata char circular_buffer[BUFFER_SIZE];    //uart buffer components
@@ -39,10 +39,10 @@ void main(void)
         cursor_display(1);   //cursor display - initial location
         delay_ms(1);
 
-        if(wr_pntr!=rd_pntr) //ONLY IF KEY IS PRESSED AND WR_PNTR!=0, THIS WILL PRINT
+        if(wr_pntr!=rd_pntr)
         {
-            putchar(circular_buffer[rd_pntr]);
-            rd_pntr=((rd_pntr+1)%BUFFER_SIZE);
+            putchar(circular_buffer[rd_pntr]);  //read value from buffer
+            rd_pntr=((rd_pntr+1)%BUFFER_SIZE);  //increment read pointer
         }
         while(1)
         {
@@ -66,25 +66,26 @@ void ex0_isr(void) __interrupt 0         //isr for external interrupt
     IEN0 &=~(GLOBAL_INT | INT0_MASK);   //disable int0 and global  interrupt
     sw_press = EXPANDER_ReadByte();     //read expander
 
+    sw_press = sw_press & SW_MASK;
     if(sw_press != 0xFF)                //identify switch and set flag
     {
-        if((sw_press & SW_MASK) == (LEFT & RIGHT))
+        if(sw_press == (LEFT & RIGHT))
         {
-            menu_action = ORIGIN_SET;
+            menu_action = VALUE_SET;
         }
-        else if((sw_press & SW_MASK) == LEFT)
+        else if(sw_press == LEFT)
         {
             menu_action = BACK;
         }
-        else if((sw_press & SW_MASK) == RIGHT)
+        else if(sw_press == RIGHT)
         {
             menu_action = ENTER;
         }
-        else if((sw_press & SW_MASK) == UP)
+        else if(sw_press == UP)
         {
             menu_action = SCROLL_UP;
         }
-        else if((sw_press & SW_MASK) == DOWN)
+        else if(sw_press == DOWN)
         {
             menu_action = SCROLL_DOWN;
         }

@@ -228,11 +228,11 @@ void lcd_screen_2_2(void)               //quick print
     Lcd_gotoxy(0,5);
     Lcd8_Write_String("QUICK");
     Lcd_gotoxy(1,1);
-    Lcd8_Write_String("1x1 SQUARE");
+    Lcd8_Write_String("5x5 SQUARE");
     Lcd_gotoxy(2,1);
-    Lcd8_Write_String("1x1 TRIANGLE");
+    Lcd8_Write_String("5x5 TRIANGLE");
     Lcd_gotoxy(3,1);
-    Lcd8_Write_String("1x1 CIRCLE");
+    Lcd8_Write_String("5x5 CIRCLE");
 }
 
 void lcd_screen_2_3(void)               //custom print on switch press
@@ -268,35 +268,30 @@ void lcd_screen_2_3_2(void)
     Lcd8_Write_String("STOP");
 }
 
-void lcd_screen_2_3_2_1(void)
-{
-    Lcd8_Clear();
-    Lcd_gotoxy(3,5);
-    Lcd8_Write_String("Printing...");
-}
-
 
 void menu_scroll(void)
 {
     if(menu_action == SCROLL_DOWN)
     {
+        menu_action=0;
         Lcd_gotoxy(1 + cursor_x,0);                //clear cursor on next line
         Lcd8_Write_Char(' ');
         cursor_x++;
         if(cursor_x > 2)
             cursor_x =2;
+
         cursor_display(1 + cursor_x);    //display cursor
-        menu_action=0;
     }
     else if(menu_action == SCROLL_UP)
     {
+        menu_action=0;
         Lcd_gotoxy(1 + cursor_x,0);                //clear cursor on prev line
         Lcd8_Write_Char(' ');
         cursor_x--;
         if(cursor_x >2)
             cursor_x = 0;
+
         cursor_display(1 + cursor_x);   //display cursor
-        menu_action=0;
     }
 }
 

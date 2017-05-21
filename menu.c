@@ -1,7 +1,8 @@
 #include "system.h"
 
 float origin_x=0.0,origin_y=0.0;         //pen location
-
+int font_size;
+char font_style;                         //0 - light , 1 - dark
 
 extern unsigned char cursor_x;
 extern unsigned char menu_action;
@@ -44,7 +45,7 @@ void origin_menu_1_1(void)              //origin setting menu option
             motor_goto_xy(origin_x,origin_y);
         }
 
-        else if(menu_action == ORIGIN_SET)   //condition for exit loop
+        else if(menu_action == VALUE_SET)   //condition for exit loop
         {
             menu_action = 0;
             Lcd8_Clear();
@@ -107,6 +108,8 @@ void quick_menu_1_2(void)        //quick print menu option
 
 void custom_menu_1_3(void)      //custom print option
 {
+    uint8_t font_size_str[1];   //to dosplay font size
+
     lcd_screen_2_3();           //cursor display - initial location
     cursor_display(1);
     cursor_x = 0;
@@ -124,30 +127,91 @@ void custom_menu_1_3(void)      //custom print option
                 while(1)
                 {
                     menu_scroll();
-                    if(menu_action == ENTER)       //enter option
+                    if(menu_action == ENTER)            //enter option
                     {
                         menu_action = 0;
                         if(cursor_x == 0)               //FONT SIZE
                         {
                             cursor_x=0;
+                            Lcd_gotoxy(1,13);                       //display font_size -initial value
+                            mod_itoa(font_size_str,font_size);
+                            Lcd8_Write_String(font_size_str);
                             while(1)
                             {
-                                //up/down switch press
-                                //increment font - font_size
-                                //display font_size -initial value
-                                //condition for break
+                                if(menu_action == SCROLL_UP)        //up/down switch press
+                                {
+                                    menu_action = 0;
+                                    if(font_size > 0)
+                                        font_size--;
+                                    Lcd_gotoxy(1,13);               //display font_size
+                                    mod_itoa(font_size_str,font_size);
+                                    Lcd8_Write_String(font_size_str);
 
+                                }
+                                else if (menu_action == SCROLL_DOWN)
+                                {
+                                    menu_action = 0;
+                                    if(font_size < MAX_FONTSIZE)
+                                        font_size++;
+                                    Lcd_gotoxy(1,13);               //display font_size
+                                    mod_itoa(font_size_str,font_size);
+                                    Lcd8_Write_String(font_size_str);
+                                }
+                                else if (menu_action == VALUE_SET)  //condition for break
+                                {
+                                    Lcd8_Clear();
+                                    Lcd_gotoxy(1,3);
+                                    Lcd8_Write_String("SIZE SET");
+                                    delay_sec(1);
+                                    lcd_screen_2_3_1();         //cursor display - initial location
+                                    cursor_display(1);
+                                    menu_action = 0;
+                                    break;
+                                }
                             }
                         }
                         else if(cursor_x == 1)          //FONT STYLE
                         {
                             cursor_x=0;
+                            Lcd_gotoxy(2,13);
+                            if(font_style == 0)
+                                Lcd8_Write_Char('L');       //default style : light
+                            else
+                                Lcd8_Write_Char('B');
                             while(1)
                             {
-                                //up/down switch press
-                                //default: light
-                                //bold-no bold display
-                                //condition for break
+                                if(menu_action == SCROLL_UP)        //up/down switch press
+                                {
+                                    menu_action = 0;
+                                    Lcd_gotoxy(2,13);
+                                    if(font_style == 1)
+                                    {
+                                        Lcd8_Write_Char('L');
+                                        font_style--;
+                                    }
+
+                                }
+                                else if (menu_action == SCROLL_DOWN)
+                                {
+                                    menu_action = 0;
+                                    Lcd_gotoxy(2,13);
+                                    if(font_style == 0)
+                                    {
+                                        Lcd8_Write_Char('B');
+                                        font_style++;
+                                    }
+                                }
+                                else if (menu_action == VALUE_SET)  //condition for break
+                                {
+                                    Lcd8_Clear();
+                                    Lcd_gotoxy(1,3);
+                                    Lcd8_Write_String("STYLE SET");
+                                    delay_sec(1);
+                                    lcd_screen_2_3_1();         //cursor display - initial location
+                                    cursor_display(1);
+                                    menu_action = 0;
+                                    break;
+                                }
                             }
                         }
                     }
@@ -175,20 +239,20 @@ void custom_menu_1_3(void)      //custom print option
                         menu_action = 0;
                         if(cursor_x == 0)               //start option
                         {
-                            Lcd_gotoxy(2,11);            //clear stop logo
+                            Lcd_gotoxy(2,11);           //clear stop logo
                             Lcd8_Write_Char(' ');
                             cursor_x=0;
-                            hour_glass(1,11);               //hour glas  logo display next to print
-                            //main print function - loop - in isr - down switch  - move cursor - break
-                            //goto origin
+                            hour_glass(1,11);           //hour glas  logo display next to print
+                            draw_string();              //main orint function
+                            pen_up();
+                            motor_goto_xy(origin_x,origin_y);      //goto origin after printing
                         }
                         else if(cursor_x == 1)           //stop option
                         {
                             Lcd_gotoxy(1,11);            //clear hour glass logo
                             Lcd8_Write_Char(' ');
-                            stop_logo(2,11);                 //exclamatio logo next to stop
-                            //stop print
-                            //back to origin
+                            stop_logo(2,11);             //exclamation logo next to stop
+                            motor_goto_xy(origin_x,origin_y);       //back to origin
                         }
                     }
                     else if(menu_action == BACK)
