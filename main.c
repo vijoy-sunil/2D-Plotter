@@ -30,6 +30,7 @@ void main(void)
 {
     int i=0,x=0,y=0;
     system_init();
+
     while(1)                //menu loop
     {
         lcd_screen_1();     //qwerty pen

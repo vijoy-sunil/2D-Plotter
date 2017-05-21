@@ -12,7 +12,7 @@ void delay_ms(unsigned int ms_count)
 {
     while(ms_count!=0)
     {
-        delay_us(112);	 //delay_us is called to generate 1ms delay
+        delay_us(52);	 //delay_us is called to generate 1ms delay
         ms_count--;
     }
 

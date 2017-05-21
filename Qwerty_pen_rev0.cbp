@@ -63,6 +63,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="menu.h" />
+		<Unit filename="servo.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="servo.h" />
 		<Unit filename="stepper_xy.c">
 			<Option compilerVar="CC" />
 		</Unit>
