@@ -22,7 +22,7 @@
 					<Add option="--std-sdcc99" />
 				</Compiler>
 				<Linker>
-					<Add option="--code-loc 0x0000 --code-size 0x8000 --xram-loc 0x0000 --xram-size 0x400 --model-large --out-fmt-ihx" />
+					<Add option="--code-loc 0x0000 --code-size 0x8000 --xram-loc 0x0000 --xram-size 0x7FFF --model-large --out-fmt-ihx" />
 				</Linker>
 			</Target>
 		</Build>

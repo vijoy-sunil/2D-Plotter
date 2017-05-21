@@ -3,6 +3,7 @@
 
 #define SERVO_STEP P1_5
 
+
 void pen_up(void);
 void pen_down(void);
 

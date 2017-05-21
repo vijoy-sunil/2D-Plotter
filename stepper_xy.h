@@ -5,23 +5,36 @@
 #define STEPPER_STEP1 P1_0                //step for motor 1
 #define STEPPER_STEP2 P1_4                //step for motor 2
 
-#define EN1_1 0x80 | 0x0F       //enable high for motor 1 with p0-p3 as inputs to send to expander
-#define DR1_1 0x40 | 0x0F       //direction 1 for motor 1
+#define EN1 P2_0
+#define DR1 P2_3
 
-#define EN1_0 0x00 | 0x0F       //enable low for motor 1 with p0-p3 as inputs to send to expander
-#define DR1_0 0x00 | 0x0F       //direction 0 for motor 1
+#define EN2 P2_1
+#define DR2 P2_4
 
-#define EN2_1 0x10 | 0x0F       //enable high for motor 2 with p0-p3 as inputs to send to expander
-#define DR2_1 0x20 | 0x0F       //direction 1 for motor 2
+#define STEP_INCR 1
+#define STEPS_PER_UNIT 25   // for straight lines to mov 1 unit (0,0) to (1,0) move this many steps
+#define STEPS_PER_UNIT_ARC 5
+#define STEPS_PER_UNIT_SL 19    //for slash
+#define STEP_DELAY 1       //delay between stepper steps
 
-#define EN2_0 0x00 | 0x0F       //enable low for motor 2 with p0-p3 as inputs to send to expander
-#define DR2_0 0x00 | 0x0F       //direction 0 for motor 2
+void motor_x(int x);
+void motor_y(int y);
 
+void goto_origin (int origin_x,int origin_y);
+void motor_goto_xy(int x,int y);
 
-void motor_x(float x);
-void motor_y(float y);
-
-void goto_origin (float origin_x,float origin_y);
-void motor_goto_xy(float x,float y);
+void move_left(unsigned int l);
+void move_right(unsigned int l);
+void move_down(unsigned int l);
+void move_up(unsigned int l);
+void move_down_right(unsigned int dr);
+void move_up_right(unsigned int dr);
+void move_up_left(unsigned int dr);
+void move_down_left(unsigned int dr);
+void top_down_right(float rd);
+void right_down_left(float rd);
+void down_up_left(float rd);
+void left_up_right(float rd);
+void circle(float rd);
 
 #endif // STEPPER_XY_H_INCLUDED

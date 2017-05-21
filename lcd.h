@@ -7,6 +7,8 @@
 //LCD Module Connections
 #define RS P1_6
 #define RW P1_7
+#define LCD_EN P2_5
+
 #define BUSY_MASK 0x80
 
 #define FIRST_LINE      0x10
@@ -14,7 +16,7 @@
 #define THIRD_LINE      0x20
 #define FORTH_LINE      0x60
 
-#define LCD_PTR ((xdata unsigned char *)0x9000)
+//#define LCD_PTR ((xdata unsigned char *)0x9000)
 //End LCD Module Connections
 void Lcd_Delay(int a);
 void Lcd_Busywait(void);

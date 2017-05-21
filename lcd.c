@@ -13,31 +13,6 @@ void Lcd_Delay(int a)
         }
     }
 }
-uint8_t read_ddram_address(void)
-{
-    uint8_t dd_add;
-    RS = 0;
-    RW = 1;
-    dd_add = *LCD_PTR;
-    return dd_add;
-}
-
-void line_mod(void)
-{
-    uint8_t d_temp;
-    d_temp = read_ddram_address();
-    if(d_temp == 143)
-        Lcd_gotoxy(1,0);
-    else if(d_temp == 207)
-        Lcd_gotoxy(2,0);
-    else if(d_temp == 159)
-        Lcd_gotoxy(3,0);
-    else if(d_temp == 223)
-    {
-        Lcd8_Clear();
-        Lcd_gotoxy(0,0);
-    }
-}
 
 void Lcd_Busywait(void)
 {
@@ -49,7 +24,7 @@ void Lcd_Busywait(void)
 
 void Lcd8_Port(char a)
 {
-    *LCD_PTR = a;
+    P0 = a;
 }
 void Lcd8_Cmd(char a)
 {
@@ -57,9 +32,9 @@ void Lcd8_Cmd(char a)
   RW = 0;
 
   Lcd8_Port(a);             //Data transfer
-  //EN  = 1;             // => E = 1
+  LCD_EN  = 1;             // => E = 1
   Lcd_Busywait();
-  //EN  = 0;             // => E = 0
+  LCD_EN  = 0;             // => E = 0
 }
 
 void Lcd8_Clear(void)
@@ -111,10 +86,9 @@ void Lcd8_Write_Char(char a)
    RW = 0;
 
    Lcd8_Port(a);             //Data transfer
-             // => E = 1
+   LCD_EN=1;          // => E = 1
    Lcd_Busywait();
-   line_mod();
-            // => E = 0
+   LCD_EN=0;        // => E = 0
 }
 
 void Lcd8_Write_String(char *a)
@@ -187,15 +161,21 @@ void lcdcreatechar(unsigned char ccode,unsigned char rows[])
 
     for(pixel_row=0;pixel_row<8;pixel_row++)
     {
-        Lcd8_Cmd(0x40);
-        *LCD_PTR = cg_add;          //set cgram address
+        Lcd8_Cmd(0x40 | cg_add);
 
-        Lcd_Delay(5);
+        Lcd_Busywait();
+        //*LCD_PTR = cg_add;          //set cgram address
+        //Lcd_Delay(5);
+
 
         RS=1;
         RW=0;
-        *LCD_PTR = rows[pixel_row]; //write to cgram
-        Lcd_Delay(5);
+        //*LCD_PTR = rows[pixel_row]; //write to cgram
+
+        Lcd8_Port(rows[pixel_row]);
+        LCD_EN  = 1;             // => E = 1
+        Lcd_Busywait();
+        LCD_EN  = 0;             // => E = 0
 
         cg_add++;
     }

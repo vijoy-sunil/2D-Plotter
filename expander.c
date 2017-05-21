@@ -27,7 +27,7 @@ unsigned char EXPANDER_ReadByte(void)
 	//I2C_NoAck();
     I2C_Stop();		                 // Stop i2c communication after Reading the data
     I2C_NoAck();
-	//delay_ms(10);
+	delay_ms(5);
 
   return expander_Data;              // Return the Read data
 }

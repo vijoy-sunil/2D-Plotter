@@ -17,6 +17,7 @@
 #include "text.h"
 #include "custom_logo.h"
 #include "menu.h"
+#include "shapes.h"
 
 #define INT0_EDGE 0x01
 #define INT0_MASK 0x01

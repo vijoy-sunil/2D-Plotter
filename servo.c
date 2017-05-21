@@ -2,32 +2,30 @@
 
 void pen_up(void)       //servo motor control
 {
-    int exit = 1000;
-    while(exit != 0)         //Neutral Pulse 1250 µs
+    int exit = 5;
+    while(exit!=0)         //550us step
     {
 
-        SERVO_STEP =0;
-        delay_ms(1);
-        delay_us(5);
         SERVO_STEP =1;
-        delay_ms(1);
-        delay_us(5);
-        exit --;
+        delay_us(27);
+        SERVO_STEP =0;
+        delay_ms(19);
+        exit--;
     }
 }
 
-
-void pen_down(void)     //servo motor control
+void pen_down(void)           //servo motor control
 {
-    int exit = 1000;
-    while(exit != 0)          //Full CCW Pulse 2200 µs*
+    int exit = 100;
+    while(exit!=0)          //1.5 ms step neutral   WORKING
     {
-        SERVO_STEP =0;
-        delay_ms(2);
-        delay_us(5);
         SERVO_STEP =1;
-        delay_ms(2);
-        delay_us(5);
+        delay_ms(1);
+        delay_us(20);
+        SERVO_STEP =0;
+        delay_ms(19);
         exit --;
     }
 }
+
+

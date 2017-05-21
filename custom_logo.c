@@ -12,36 +12,53 @@ void lcd_screen_1(void)         //QWERTY PEN
     lcdcreatechar(2,main_logo2);
     lcdcreatechar(3,main_logo3);
 
-    Lcd_gotoxy(1,3);
 
+    Lcd_gotoxy(1,3);
+    Lcd_Busywait();
     RS=1;
     RW=0;
-    *LCD_PTR = 0;           //write to ddram
+    //*LCD_PTR = 0;           //write to ddram
 
-    Lcd_Delay(5);
+    Lcd8_Port(0);
+    LCD_EN  = 1;             // => E = 1
+    Lcd_Busywait();
+    LCD_EN  = 0;             // => E = 0
 
     Lcd_gotoxy(1,4);
-
+    Lcd_Busywait();
     RS=1;
     RW=0;
-    *LCD_PTR = 1;           //write to ddram
-    Lcd_Delay(5);
+    //*LCD_PTR = 1;           //write to ddram
+
+    Lcd8_Port(1);
+    LCD_EN  = 1;             // => E = 1
+    Lcd_Busywait();
+    LCD_EN  = 0;             // => E = 0
 
     Lcd_gotoxy(2,4);
-
+    Lcd_Busywait();
     RS=1;
     RW=0;
-    *LCD_PTR = 2;           //write to ddram
-    Lcd_Delay(5);
+    //*LCD_PTR = 2;           //write to ddram
+
+    Lcd8_Port(2);
+    LCD_EN  = 1;             // => E = 1
+    Lcd_Busywait();
+    LCD_EN  = 0;             // => E = 0
 
     Lcd_gotoxy(2,3);
-
+    Lcd_Busywait();
     RS=1;
     RW=0;
-    *LCD_PTR = 3;           //write to ddram
-    Lcd_Delay(5);
+    //*LCD_PTR = 3;           //write to ddram
+
+    Lcd8_Port(3);
+    LCD_EN  = 1;             // => E = 1
+    Lcd_Busywait();
+    LCD_EN  = 0;             // => E = 0
 
     Lcd_gotoxy(1,5);
+    Lcd_Busywait();
     Lcd8_Write_String("WERTY PEN");
     Lcd_Delay(5);
 }
@@ -55,7 +72,11 @@ void cursor_display(char x)           //display cursor- custom char - stored at 
     Lcd_Delay(5);
     RS=1;
     RW=0;
-    *LCD_PTR = 7;           //write to ddram
+    //*LCD_PTR = 7;           //write to ddram
+    Lcd8_Port(7);
+    LCD_EN  = 1;             // => E = 1
+    Lcd_Busywait();
+    LCD_EN  = 0;             // => E = 0
 }
 
 void hour_glass(char x,char y)           //display logo while printing
@@ -67,7 +88,11 @@ void hour_glass(char x,char y)           //display logo while printing
     Lcd_Delay(5);
     RS=1;
     RW=0;
-    *LCD_PTR = 6;               //write to ddram
+    //*LCD_PTR = 6;               //write to ddram
+    Lcd8_Port(6);
+    LCD_EN  = 1;             // => E = 1
+    Lcd_Busywait();
+    LCD_EN  = 0;             // => E = 0
 }
 
 void stop_logo(char x,char y)           //display logo while printing
@@ -79,7 +104,11 @@ void stop_logo(char x,char y)           //display logo while printing
     Lcd_Delay(5);
     RS=1;
     RW=0;
-    *LCD_PTR = 5;               //write to ddram
+    //*LCD_PTR = 5;               //write to ddram
+    Lcd8_Port(5);
+    LCD_EN  = 1;             // => E = 1
+    Lcd_Busywait();
+    LCD_EN  = 0;             // => E = 0
 }
 
 void origin_menu_x(char x1,char y1,char x2,char y2)
@@ -94,15 +123,21 @@ void origin_menu_x(char x1,char y1,char x2,char y2)
     Lcd_Delay(5);
     RS=1;
     RW=0;
-    *LCD_PTR = 4;               //write to ddram
-
-    Lcd_Delay(5);
+    //*LCD_PTR = 4;               //write to ddram
+    Lcd8_Port(4);
+    LCD_EN  = 1;             // => E = 1
+    Lcd_Busywait();
+    LCD_EN  = 0;             // => E = 0
 
     Lcd_gotoxy(x2,y2);
     Lcd_Delay(5);
     RS=1;
     RW=0;
-    *LCD_PTR = 3;               //write to ddram
+    //*LCD_PTR = 3;               //write to ddram
+    Lcd8_Port(3);
+    LCD_EN  = 1;             // => E = 1
+    Lcd_Busywait();
+    LCD_EN  = 0;             // => E = 0
 }
 
 void origin_menu_y(char x1,char y1,char x2,char y2)
@@ -117,13 +152,19 @@ void origin_menu_y(char x1,char y1,char x2,char y2)
     Lcd_Delay(5);
     RS=1;
     RW=0;
-    *LCD_PTR = 2;               //write to ddram
-
-    Lcd_Delay(5);
+    //*LCD_PTR = 2;               //write to ddram
+    Lcd8_Port(2);
+    LCD_EN  = 1;             // => E = 1
+    Lcd_Busywait();
+    LCD_EN  = 0;             // => E = 0
 
     Lcd_gotoxy(x2,y2);
     Lcd_Delay(5);
     RS=1;
     RW=0;
-    *LCD_PTR = 1;               //write to ddram
+    //*LCD_PTR = 1;               //write to ddram
+    Lcd8_Port(1);
+    LCD_EN  = 1;             // => E = 1
+    Lcd_Busywait();
+    LCD_EN  = 0;             // => E = 0
 }

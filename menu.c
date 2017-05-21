@@ -1,11 +1,13 @@
 #include "system.h"
 
-float origin_x=0.0,origin_y=0.0;         //pen location
+int origin_x,origin_y;                  //pen location
 int font_size;
 char font_style;                         //0 - light , 1 - dark
 
 extern unsigned char cursor_x;
 extern unsigned char menu_action;
+
+int temp;
 
 void origin_menu_1_1(void)              //origin setting menu option
 {
@@ -18,31 +20,43 @@ void origin_menu_1_1(void)              //origin setting menu option
 
         if(menu_action == BACK)
         {
-            if(origin_x > X_STARTPAGE)
-                origin_x = origin_x - 0.1;
             menu_action=0;
-            motor_goto_xy(origin_x,origin_y);
+            if(origin_x > X_STARTPAGE)
+            {
+                origin_x = origin_x - STEP_INCR;
+                printf("\r\nmove in -x : %d",origin_x);
+                motor_goto_xy(origin_x,origin_y);
+            }
         }
         else if(menu_action == ENTER)
         {
-            if(origin_x < X_ENDPAGE)
-                origin_x = origin_x + 0.1;
             menu_action=0;
-            motor_goto_xy(origin_x,origin_y);
+            if(origin_x < X_ENDPAGE)
+            {
+                origin_x = origin_x + STEP_INCR;
+                printf("\r\nmove in +x: %d",origin_x);
+                motor_goto_xy(origin_x,origin_y);
+            }
         }
         else if(menu_action == SCROLL_UP)
         {
-            if(origin_y > Y_STARTPAGE)
-                origin_y = origin_y - 0.1;
             menu_action=0;
-            motor_goto_xy(origin_x,origin_y);
+            if(origin_y > Y_STARTPAGE)
+            {
+                origin_y = origin_y - STEP_INCR;
+                printf("\r\nmove in -y: %d",origin_y);
+                motor_goto_xy(origin_x,origin_y);
+            }
         }
         else if(menu_action == SCROLL_DOWN)
         {
-            if(origin_y < Y_ENDPAGE)
-                origin_y = origin_y + 0.1;
             menu_action=0;
-            motor_goto_xy(origin_x,origin_y);
+            if(origin_y < Y_ENDPAGE)
+            {
+                origin_y = origin_y + STEP_INCR;
+                printf("\r\nmove in +y: %d",origin_y);
+                motor_goto_xy(origin_x,origin_y);
+            }
         }
 
         else if(menu_action == VALUE_SET)   //condition for exit loop
@@ -141,7 +155,7 @@ void custom_menu_1_3(void)      //custom print option
                                 if(menu_action == SCROLL_UP)        //up/down switch press
                                 {
                                     menu_action = 0;
-                                    if(font_size > 0)
+                                    if(font_size > 1)
                                         font_size--;
                                     Lcd_gotoxy(1,13);               //display font_size
                                     mod_itoa(font_size_str,font_size);
