@@ -7,11 +7,8 @@ void system_init(void)
     Lcd8_Clear();
     delay_ms(5);
 
-    EN1 = 1;
-    EN2 = 1;
-
     pen_down();
-    pen_up();
+        pen_up();
 }
 
 void putchar(char ch)

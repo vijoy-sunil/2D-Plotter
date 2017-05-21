@@ -1,18 +1,19 @@
 #include "system.h"
 
 
-extern unsigned char cursor_x;
+extern unsigned char cursor_x,end_origin;
 extern unsigned char menu_action;
-
-int temp;
+char in_origin;
 
 void origin_menu_1_1(void)              //origin setting menu option
 {
+    in_origin = 1;
     lcd_screen_2_1();
     cursor_x = 0;
     origin_menu_x(2,6,2,8);            //custom logo for x dir
     origin_menu_y(1,7,3,7);            //custom logo for y dir
     menu_action = 0;
+    end_origin = 0;
     while(1)
     {
         if(menu_action == BACK)
@@ -20,9 +21,14 @@ void origin_menu_1_1(void)              //origin setting menu option
             menu_action = 0;
             while(menu_action != BACK)
             {
+                line_mod_left();
+                if(end_origin == 1)
+                    break;
                 move_left(STEPS_PER_UNIT);
+
             }
             menu_action = 0;
+            end_origin = 0;
         }
 
         if(menu_action == ENTER)
@@ -30,9 +36,13 @@ void origin_menu_1_1(void)              //origin setting menu option
             menu_action = 0;
             while(menu_action != ENTER)
             {
+                line_mod_right();
+                if(end_origin == 1)
+                    break;
                 move_right(STEPS_PER_UNIT);
             }
             menu_action = 0;
+            end_origin = 0;
         }
 
         if(menu_action == SCROLL_UP)
@@ -43,6 +53,7 @@ void origin_menu_1_1(void)              //origin setting menu option
                 move_up(STEPS_PER_UNIT);
             }
             menu_action = 0;
+            end_origin = 0;
         }
 
         if(menu_action == SCROLL_DOWN)
@@ -50,9 +61,10 @@ void origin_menu_1_1(void)              //origin setting menu option
             menu_action = 0;
             while(menu_action != SCROLL_DOWN)
             {
-                move_right(STEPS_PER_UNIT);
+                move_down(STEPS_PER_UNIT);
             }
             menu_action = 0;
+            end_origin = 0;
         }
 
         if(menu_action == VALUE_SET)   //condition for exit loop
@@ -66,6 +78,7 @@ void origin_menu_1_1(void)              //origin setting menu option
             cursor_display(1);          //cursor display initial location
             menu_action=0;
             cursor_x = 0;
+            in_origin = 0;
             break;
         }
     }

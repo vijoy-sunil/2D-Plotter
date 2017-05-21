@@ -2,17 +2,7 @@
 
 extern unsigned char menu_action;
 
-void line_mod(void)
-{
-    if(LEFT_END == 0)
-    {
-        printf("\r\nleft end");
-    }
-    else if(RIGHT_END == 0)
-    {
-      printf("\r\nright end");
-    }
-}
+
 void move_left(unsigned int l)
 {
     EN1 = 0;

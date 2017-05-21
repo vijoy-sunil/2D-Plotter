@@ -18,15 +18,8 @@
 #define STEPS_PER_UNIT 25   // for straight lines to mov 1 unit (0,0) to (1,0) move this many steps
 #define STEPS_PER_UNIT_ARC 4
 #define STEPS_PER_UNIT_SL 15    //for slash
-#define STEP_DELAY 15       //delay between stepper steps
+#define STEP_DELAY 17       //delay between stepper steps
 
-void line_mod(void);
-
-void motor_x(int x);
-void motor_y(int y);
-
-void goto_origin (int origin_x,int origin_y);
-void motor_goto_xy(int x,int y);
 
 void move_left(unsigned int l);
 void move_right(unsigned int l);

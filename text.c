@@ -2,259 +2,212 @@
 extern float current_x,current_y;
 extern unsigned char cursor_x;
 extern unsigned char menu_action;
+char circular_buffer[BUFFER_SIZE];
+char stop_draw,end_origin;
+extern char in_origin;
 
-
-void next_line(void)
+void line_mod(void)
 {
-    //motor_x(0);
-    //motor_y(current_y + LINE_SPACE);
+    stop_draw = 0;
+    if(LEFT_END == 0)
+    {
+
+    }
+    else if(RIGHT_END == 0)
+    {
+        stop_draw = 1;
+        pen_up();
+        move_down(25 * 2 * 20);
+        while(LEFT_END !=0)
+        {
+            move_left(25);
+        }
+    }
 }
 
-void next_word (void)
+void line_mod_left(void)
 {
-    //motor_x(current_x + WORD_SPACE);
+    if(LEFT_END == 0)
+    {
+        end_origin = 1;
+    }
 }
 
-void next_letter (void)
+void line_mod_right(void)
 {
-    //motor_x(current_x + LETTER_SPACE);
+    if(RIGHT_END == 0)
+    {
+        end_origin = 1;
+    }
 }
-
-//void draw_char (char letter)
-//{
-//    int i;
-//    switch(letter)
-//    {
-//        case 'A':
-//            pen_down();
-//            forward_slash_steep();
-//            pen_up();
-//            for(i=0;i<LR_SIZE;i++)
-//                move_up(STEPS_PER_UNIT);
-//            for(i=0;i<LR_SIZE;i++)
-//                move_right(STEPS_PER_UNIT_SL-2);
-//            pen_down();
-//            backward_slash_steep();
-//            pen_up();
-//            break;
-//
-//        case 'B':
-//            break;
-//
-//        case 'C':
-//            break;
-//
-//        case 'D':
-//            break;
-//
-//        case 'E':
-//            break;
-//
-//        case 'F':
-//            break;
-//
-//        case 'G':
-//            break;
-//
-//        case 'H':
-//            break;
-//
-//        case 'I':
-//            break;
-//
-//        case 'J':
-//            break;
-//
-//        case 'K':
-//            break;
-//
-//        case 'L':
-//            break;
-//
-//        case 'M':
-//            break;
-//
-//        case 'N':
-//            break;
-//
-//        case 'O':
-//            break;
-//
-//        case 'P':
-//            break;
-//
-//        case 'Q':
-//            break;
-//
-//        case 'R':
-//            break;
-//
-//        case 'S':
-//            break;
-//
-//        case 'T':
-//            break;
-//
-//        case 'U':
-//            break;
-//
-//        case 'V':
-//            break;
-//
-//        case 'W':
-//            break;
-//
-//        case 'X':
-//            break;
-//
-//        case 'Y':
-//            break;
-//
-//        case 'Z':
-//            break;
-//
-//        case 'a':
-//            break;
-//
-//        case 'b':
-//            break;
-//
-//        case 'c':
-//            break;
-//
-//        case 'd':
-//            break;
-//
-//        case 'e':
-//            break;
-//
-//        case 'f':
-//            break;
-//
-//        case 'g':
-//            break;
-//
-//        case 'h':
-//            break;
-//
-//        case 'i':
-//            break;
-//
-//        case 'j':
-//            break;
-//
-//        case 'k':
-//            break;
-//
-//        case 'l':
-//            break;
-//
-//        case 'm':
-//            break;
-//
-//        case 'n':
-//            break;
-//
-//        case 'o':
-//            break;
-//
-//        case 'p':
-//            break;
-//
-//        case 'q':
-//            break;
-//
-//        case 'r':
-//            break;
-//
-//        case 's':
-//            break;
-//
-//        case 't':
-//            break;
-//
-//        case 'u':
-//            break;
-//
-//        case 'v':
-//            break;
-//
-//        case 'w':
-//            break;
-//
-//        case 'x':
-//            break;
-//
-//        case 'y':
-//            break;
-//
-//        case 'z':
-//            break;
-//
-//        case '0':
-//            break;
-//
-//        case '1':
-//            break;
-//
-//        case '2':
-//            break;
-//
-//        case '3':
-//            break;
-//
-//        case '4':
-//            break;
-//
-//        case '5':
-//            break;
-//
-//        case '6':
-//            break;
-//
-//        case '7':
-//            break;
-//
-//        case '8':
-//            break;
-//
-//        case '9':
-//            break;
-//
-//        default:
-//            break;
-//    }
-//}
 
 void draw_string (void)
 {
-    char bitmap_byte;
-    int ii;
-//read from buffer here
-//calls draw char here
-//calls next_line,next_word,next_letter PEN_UP AND PEN_DOWN automatically
+    int pixels,pix_chunk,pix_size,ii;
 
-    for(ii=0;ii<400;ii++)
+    char row_len,col_len,loop_break,str_len;
+    int down_fl = 0,up_fl=0;
+    stop_draw = 0;
+    loop_break = 0;
+
+    putchar('!');               //in print function
+    while(1)
     {
-        bitmap_byte = getchar();
+        pixels=0;
+        pix_chunk=0;
+        pix_size=0;
 
-        if(bitmap_byte == 1)
-        {
-            pen_down();
-            move_right(125);
-            pen_up();
-        }
-        else
-        {
-           move_right(125);
-        }
-        if((ii+1)%20==0)
-        {
-             move_down(125);
-             move_left(2500);
-        }
+        row_len=0,col_len=0;
 
-        putchar('S');
+        row_len = getchar();
+        col_len = getchar();
+        pix_size = getchar();
+        str_len = getchar();
+
+        row_len = (row_len -48) * 10;
+        col_len = (col_len -48) * 10;
+        pix_size =  (pix_size -48) * 10;    // for 200*200 , pixel is 20; for 20*20, pixel is 10
+        str_len =  (str_len -48);
+
+        pixels= row_len*col_len;
+
+        ii=0;
+
+        if(pix_size==20)    //image 400 * 400
+        {
+            for(pix_chunk=0;pix_chunk<=99;pix_chunk++)
+            {
+                ii=0;
+                while(ii < pixels)
+                {
+                    circular_buffer[ii]=getchar();
+                    putchar('Q');           //ACK
+                    ii++;
+                }
+                for(ii=0;ii<pixels;ii++)
+                {
+                    if(circular_buffer[ii] == '1')
+                    {
+                        if(down_fl == 0)
+                        {
+                            pen_down();
+                            down_fl = 1;
+                            up_fl = 0;
+                        }
+                         move_right(25);
+
+                    }
+                    else
+                    {
+                        if(up_fl == 0)
+                        {
+                            pen_up();
+                            up_fl = 1;
+                            down_fl = 0;
+                        }
+                        move_right(25);
+                    }
+                    if(((ii+1) % row_len)==0)
+                    {
+                         pen_up();
+                        up_fl = 1;
+                        down_fl = 0;
+                        move_down(25);
+                        move_left(25 * row_len);
+
+                    }
+                    line_mod(); //stop printing
+                    if(stop_draw == 1)
+                    {
+                        loop_break = 1;
+                        break;
+                    }
+                    menu_scroll();
+                    if(menu_action == ENTER)  // break condition - ADD STOP BUTTON ALSO
+                    {
+                        menu_action = 0;
+                        if(cursor_x == 1)               //start option
+                        {
+                            loop_break =1;
+                            break;
+                        }
+                    }
+                }
+                if(loop_break == 1)
+                    break;
+                putchar('S');
+                if((pix_chunk+1)%10==0)
+                {
+                    move_right(22*row_len);
+                    move_up(25*10*col_len);
+                }
+            }
+            if(loop_break == 1)
+                break;
+        }
+        else        //letters 20*20
+        {
+                ii=0;
+
+                while(ii < pixels)
+                {
+                    circular_buffer[ii]=getchar();
+                    putchar('Q');
+                    ii++;
+                }
+
+                for(ii=0;ii<pixels;ii++)
+                {
+                    if(circular_buffer[ii] == '1')
+                    {
+                        if(down_fl == 0)
+                        {
+                            pen_down();
+                            down_fl = 1;
+                            up_fl = 0;
+                        }
+                        move_right(25);
+                    }
+                    else
+                    {
+                        if(up_fl == 0)
+                        {
+                            pen_up();
+                            up_fl = 1;
+                            down_fl = 0;
+                        }
+                        move_right(25);
+                    }
+                    if(((ii+1) % row_len)==0)
+                    {
+                        pen_up();
+                        up_fl = 1;
+                        down_fl = 0;
+                        move_down(25);
+                        move_left(25 * row_len);
+
+                    }
+                    line_mod();                 //move to next line - start
+                    menu_scroll();
+                    if(menu_action == ENTER)  // break condition - ADD STOP BUTTON ALSO
+                    {
+                        menu_action = 0;
+                        if(cursor_x == 1)               //start option
+                        {
+                            loop_break =1;
+                            break;
+                        }
+                    }
+                }
+            if(loop_break == 1)
+                break;
+            move_right(25*row_len);
+            move_up(25*col_len);
+            putchar('S');   //ack
+             if(str_len == 1)
+                break;
+
+        }
     }
 }
 
