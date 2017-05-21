@@ -208,33 +208,11 @@ void lcd_screen_2_2(void)               //quick print
     Lcd_gotoxy(0,5);
     Lcd8_Write_String("QUICK");
     Lcd_gotoxy(1,1);
-    Lcd8_Write_String("5x5 SQUARE");
+    Lcd8_Write_String("3x3 SQUARE");
     Lcd_gotoxy(2,1);
-    Lcd8_Write_String("5x5 TRIANGLE");
+    Lcd8_Write_String("3x3 TRIANGLE");
     Lcd_gotoxy(3,1);
-    Lcd8_Write_String("5x5 CIRCLE");
-}
-
-void lcd_screen_2_3(void)               //custom print on switch press
-{
-   Lcd8_Clear();
-   Lcd_gotoxy(0,2);
-   Lcd8_Write_String("Custom Print");
-   Lcd_gotoxy(1,1);
-   Lcd8_Write_String("STYLE options");  //font size/bold
-   Lcd_gotoxy(2,1);
-   Lcd8_Write_String("PRINT options");  //start-stop-pause
-}
-
-void lcd_screen_2_3_1(void)
-{
-    Lcd8_Clear();
-    Lcd_gotoxy(0,5);
-    Lcd8_Write_String("STYLE");
-    Lcd_gotoxy(1,1);
-    Lcd8_Write_String("FONT size");   // increment on press
-    Lcd_gotoxy(2,1);
-    Lcd8_Write_String("FONT style");  //BOLD / LIGHT
+    Lcd8_Write_String("3x3 CIRCLE");
 }
 
 void lcd_screen_2_3_2(void)

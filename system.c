@@ -1,9 +1,4 @@
 #include "system.h"
-extern unsigned char cursor_x;
-extern int current_x,current_y;
-extern int font_size;
-extern char font_style;
-extern int origin_x,origin_y;
 
 void system_init(void)
 {
@@ -11,17 +6,12 @@ void system_init(void)
     EXPANDER_WriteByte(EXP_INPUT);      //config input and output pins
     Lcd8_Clear();
     delay_ms(5);
-    //-------- init values of global vars --------//
-    cursor_x = 0;                       //init value of cursor
-    current_x = 0;                    //current cordinates default
-    current_y = 0;
-    origin_x = 0;
-    origin_y = 0;
-    font_size = 1;                      //default font size
-    font_style = 0;                     //0 - light , 1 - dark
-    //--------------------------------------------//
+
+    EN1 = 1;
+    EN2 = 1;
+
+    pen_down();
     pen_up();
-    motor_goto_xy(0,0);                 //on power up goto default location 0,0
 }
 
 void putchar(char ch)

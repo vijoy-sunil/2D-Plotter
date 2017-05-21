@@ -11,11 +11,16 @@
 #define EN2 P2_1
 #define DR2 P2_4
 
+#define LEFT_END    P2_2
+#define RIGHT_END   P2_6
+
 #define STEP_INCR 1
 #define STEPS_PER_UNIT 25   // for straight lines to mov 1 unit (0,0) to (1,0) move this many steps
-#define STEPS_PER_UNIT_ARC 5
-#define STEPS_PER_UNIT_SL 19    //for slash
-#define STEP_DELAY 1       //delay between stepper steps
+#define STEPS_PER_UNIT_ARC 4
+#define STEPS_PER_UNIT_SL 15    //for slash
+#define STEP_DELAY 15       //delay between stepper steps
+
+void line_mod(void);
 
 void motor_x(int x);
 void motor_y(int y);
@@ -35,6 +40,6 @@ void top_down_right(float rd);
 void right_down_left(float rd);
 void down_up_left(float rd);
 void left_up_right(float rd);
-void circle(float rd);
+
 
 #endif // STEPPER_XY_H_INCLUDED

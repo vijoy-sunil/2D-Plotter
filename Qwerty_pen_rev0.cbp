@@ -67,6 +67,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="servo.h" />
+		<Unit filename="shapes.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="shapes.h" />
 		<Unit filename="stepper_xy.c">
 			<Option compilerVar="CC" />
 		</Unit>

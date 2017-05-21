@@ -60,8 +60,7 @@ char step_value[] = {5,3,2,2,1,1,1};
 #define LETTER_SPACE    0
 #define LINE_SPACE      0
 
-
-#define MAX_FONTSIZE 5
+#define BT_RESET P2_7
 
 
 void next_line(void);
@@ -71,17 +70,4 @@ void draw_char (char letter);
 void draw_string (void);
 
 
-void quick_square(void);
-void quick_triangle(void);
-void quick_circle(void);
-
-//void draw_long_forward_slash(void);
-//void draw_long_backward_slash(void);
-//void draw_long_horizontal(void);
-//void draw_long_vertical(void);
-//
-//void draw_small_forward_slash(void);
-//void draw_small_backward_slash(void);
-//void draw_small_horizontal(void);
-//void draw_small_vertical(void);
 #endif // TEXT_H_INCLUDED

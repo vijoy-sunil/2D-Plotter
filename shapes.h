@@ -10,6 +10,10 @@ void backward_slash_draw(void);
 
 void square_draw(char size_square_cm);
 void triangle_draw(char size_triangle_cm);
+void circle_draw(float rd);
+
+void forward_slash_steep(void);
+void backward_slash_steep(void);
 
 #define UD_SIZE 20  //up down slash line size for 1 cm
 #define LR_SIZE 20   //left right line size for 1cm
